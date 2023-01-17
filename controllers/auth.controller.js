@@ -1,5 +1,6 @@
 const User = require('../model/user.model');
 const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 
 const maxAge = 365 * 24 * 60 * 60 * 1000;
 
@@ -47,7 +48,6 @@ module.exports.signIn = async (req, res) =>{
         const token = createToken(user._id);
         res.cookie('jwt', token, {httpOnly: true, maxAge});
         res.status(200).json({user});
-        console.log(user);
     }
     catch(err){
         return res.status(401).json({message:"paire nom d'utiliasateur/mot de passe incorrecte"});

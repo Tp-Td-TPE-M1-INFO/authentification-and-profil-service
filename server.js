@@ -8,7 +8,7 @@ const app = express();
 const {checkUser, requireAuth} = require('./middleware/auth.middleware');
 
 //jwt
-app.get('*', checkUser);
+//app.get('*', checkUser);
 app.get('/jwtid', requireAuth, (req, res) =>{
    res.status(200).send(res.locals.user._id)
 })
@@ -21,7 +21,7 @@ app.use(cookieParser());
 
 
 // m
-app.use('/api/user/', userRooutes);
+app.use('/api/user/', checkUser, userRooutes);
 
 
 //listen
